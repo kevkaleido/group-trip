@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Planner SPA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#trip-planning">Trip Planning</a></li>
+                <li><a href="#expense-logging">Expense Logging</a></li>
+                <li><a href="#cost-splitting">Cost Splitting</a></li>
+                <li><a href="#reports">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- Trip Planning Section -->
+        <section id="trip-planning">
+            <h1>Trip Planning</h1>
+            <form id="new-trip-form">
+                <h2>Create a New Trip</h2>
+                <label for="trip-destination">Destination:</label>
+                <input type="text" id="trip-destination" required>
+                <label for="trip-start-date">Start Date:</label>
+                <input type="date" id="trip-start-date" required>
+                <label for="trip-end-date">End Date:</label>
+                <input type="date" id="trip-end-date" required>
+                <button type="submit">Create Trip</button>
+            </form>
+            <div id="trip-participants">
+                <h2>Manage Participants</h2>
+                <input type="text" id="participant-name" placeholder="Add Participant">
+                <button id="add-participant">Add</button>
+                <ul id="participants-list"></ul>
+            </div>
+            <div id="trip-activities">
+                <h2>Planned Activities</h2>
+                <input type="text" id="activity-name" placeholder="Add Activity">
+                <button id="add-activity">Add</button>
+                <ul id="activities-list"></ul>
+            </div>
+        </section>
+        <!-- Expense Logging Section -->
+        <section id="expense-logging">
+            <h1>Expense Logging</h1>
+            <form id="new-expense-form">
+                <h2>Add New Expense</h2>
+                <label for="expense-amount">Amount:</label>
+                <input type="number" id="expense-amount" required>
+                <label for="expense-category">Category:</label>
+                <input type="text" id="expense-category" required>
+                <label for="expense-payer">Payer:</label>
+                <input type="text" id="expense-payer" required>
+                <label for="expense-date">Date:</label>
+                <input type="date" id="expense-date" required>
+                <button type="submit">Add Expense</button>
+            </form>
+            <div id="expenses-list">
+                <h2>All Expenses</h2>
+                <ul id="expenses"></ul>
+            </div>
+        </section>
+        <!-- Cost Splitting Section -->
+        <section id="cost-splitting">
+            <h1>Cost Splitting</h1>
+            <div id="total-cost">
+                <h2>Total Trip Cost</h2>
+                <p id="trip-cost">0</p>
+            </div>
+            <div id="participant-shares">
+                <h2>Participant Shares</h2>
+                <ul id="shares-list"></ul>
+            </div>
+        </section>
+        <!-- Reports Section -->
+        <section id="reports">
+            <h1>Reports</h1>
+            <button id="generate-summary">Generate Summary</button>
+            <div id="summary">
+                <h2>Summary</h2>
+                <p id="summary-content"></p>
+            </div>
+            <button id="export-data">Export Data</button>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
