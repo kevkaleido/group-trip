@@ -13,15 +13,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const participants = [];
     const activities = [];
 
-    tripForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const destination = document.getElementById('trip-destination').value;
-        const startDate = document.getElementById('trip-start-date').value;
-        const endDate = document.getElementById('trip-end-date').value;
+    // tripForm.addEventListener('submit', function (e) {
+    //     e.preventDefault();
+    //     const destination = document.getElementById('trip-destination').value;
+    //     const startDate = document.getElementById('trip-start-date').value;
+    //     const endDate = document.getElementById('trip-end-date').value;
 
-        alert(`Trip to ${destination} from ${startDate} to ${endDate} created!`);
-        tripForm.reset();
-    });
+    //     alert(`Trip to ${destination} from ${startDate} to ${endDate} created!`);
+    //     tripForm.reset();
+    // });
 
     addParticipantButton.addEventListener('click', function () {
         const name = participantNameInput.value;
@@ -29,6 +29,18 @@ document.addEventListener('DOMContentLoaded', function () {
             participants.push(name);
             const li = document.createElement('li');
             li.textContent = name;
+
+            // Add remove button
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.style.marginLeft = '10px';
+            removeButton.addEventListener('click', function () {
+                participantsList.removeChild(li);
+                participants.splice(participants.indexOf(name), 1);
+                updateCostSplitting();
+            });
+
+            li.appendChild(removeButton);
             participantsList.appendChild(li);
             participantNameInput.value = '';
         }
@@ -40,6 +52,17 @@ document.addEventListener('DOMContentLoaded', function () {
             activities.push(activity);
             const li = document.createElement('li');
             li.textContent = activity;
+
+            // Add remove button
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remove';
+            removeButton.style.marginLeft = '10px';
+            removeButton.addEventListener('click', function () {
+                activitiesList.removeChild(li);
+                activities.splice(activities.indexOf(activity), 1);
+            });
+
+            li.appendChild(removeButton);
             activitiesList.appendChild(li);
             activityNameInput.value = '';
         }
@@ -103,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     generateSummaryButton.addEventListener('click', function () {
         let summary = 'Trip Summary:\n\n';
-        summary += `Total Cost: $${tripCostElement.textContent}\n\n`;
+        summary += `Total Cost: ${tripCostElement.textContent}\n\n`;
         summary += 'Expenses:\n';
 
         expenses.forEach(expense => {
