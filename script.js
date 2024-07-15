@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const share = shares[participant] - perPersonShare;
             const li = document.createElement('li');
             if (share > 0) {
-                li.textContent = `${participant} owns ₦${share.toFixed(2)}`;
+                li.textContent = `${participant} is owed ₦${share.toFixed(2)}`;
             } else {
                 li.textContent = `${participant} owes ₦${Math.abs(share).toFixed(2)}`;
             }
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', function () {
         participants.forEach(participant => {
             const share = shares[participant] - perPersonShare;
             if (share > 0) {
-                summary += `${participant} owns ₦${share.toFixed(2)}\n`;
+                summary += `${participant} is owed ₦${share.toFixed(2)}\n`;
             } else {
                 summary += `${participant} owes ₦${Math.abs(share).toFixed(2)}\n`;
             }
