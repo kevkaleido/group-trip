@@ -43,8 +43,7 @@ main {
 
 section {
     margin-bottom: 3em;
-    padding: 5em;
-    padding-top: 2em;
+    padding: 2em;
     background: rgba(255, 255, 255, 0.8); /* Semi-transparent */
     border-radius: 16px;
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); /* Larger shadow */

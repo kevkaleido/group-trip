@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
             participantsList.removeChild(li);
             participants = participants.filter(participant => participant !== name);
             localStorage.setItem('participants', JSON.stringify(participants));
+            removeParticipantExpenses(name);
             updateCostSplitting();
             updatePayerDropdown();
         });
@@ -93,6 +94,17 @@ document.addEventListener('DOMContentLoaded', function () {
             option.textContent = participant;
             payerSelect.appendChild(option);
         });
+    }
+
+    function removeParticipantExpenses(participantName) {
+        expenses = expenses.filter(expense => expense.payer !== participantName);
+        localStorage.setItem('expenses', JSON.stringify(expenses));
+        renderExpenses();
+    }
+
+    function renderExpenses() {
+        expensesList.innerHTML = '';
+        expenses.forEach(addExpenseToDOM);
     }
 
     // Activity Functions
