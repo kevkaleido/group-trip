@@ -80,6 +80,7 @@ input, select, button {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
+
 input[type="text"], input[type="number"], input[type="date"], select {
     width: calc(100% - 1em);
     background: #FFEB3B;
@@ -251,17 +252,15 @@ header, main {
     nav ul {
         width: 90%;
     }
-    .modal-content{
-    max-width: 50%;
+
+.modal-content{
+    max-width: 70%;
     }
 
     nav ul li {
         margin-bottom: 0.5em;
     }
 
-    .modal-content {
-        width: 90%;
-    }
 
     main {
         padding: 7em 1em 2em;
@@ -272,3 +271,4 @@ header, main {
         font-size: 1em;
     }
 }
+

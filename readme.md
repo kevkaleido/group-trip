@@ -7,7 +7,6 @@ The Trip Planner is a single-page application designed to help users plan trips,
 ## Features
 
 1. **Trip Planning**
-   - Create a new trip with start and end dates, and a destination.
    - Manage participants by adding and removing them from the trip.
    - Plan activities and mark them as done.
 
