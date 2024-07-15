@@ -1,7 +1,7 @@
 /* styles.css */
 
 body {
-    font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font */
+    font-family: 'Arial', sans-serif; /* Readable font */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -28,7 +28,6 @@ nav ul li a {
     color: #f84e4e;
     text-decoration: none;
     font-weight: bold;
-
     transform: skewX(-10deg); /* Skewed links */
     transition: color 0.3s, transform 0.3s; /* Smooth transition */
 }
@@ -40,13 +39,12 @@ nav ul li a:hover {
 
 main {
     padding: 3em;
-    transform: rotate(-2deg); /* Slightly rotated */
-    
 }
 
 section {
     margin-bottom: 3em;
-    padding: 2em;
+    padding: 5em;
+    padding-top: 2em;
     background: rgba(255, 255, 255, 0.8); /* Semi-transparent */
     border-radius: 16px;
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); /* Larger shadow */
@@ -83,7 +81,7 @@ input, button {
     padding: 1em;
     width: 100%;
     border-radius: 8px; /* Rounded corners */
-    font-family: 'Courier New', Courier, monospace; /* Monospace font */
+    font-family: 'Verdana', sans-serif; /* Readable font */
 }
 
 button {
@@ -146,7 +144,6 @@ li:hover {
     }
 }
 
-
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
@@ -185,4 +182,3 @@ li:hover {
     text-decoration: none;
     cursor: pointer;
 }
-
