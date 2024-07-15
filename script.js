@@ -62,11 +62,18 @@ document.addEventListener('DOMContentLoaded', function () {
         customAlertModal.style.display = 'block';
     }
 
-    function showConfirm(message, continueCallback) {
-        confirmMessage.textContent = message;
-        confirmModal.style.display = 'block';
-        continueButton.onclick = continueCallback;
-    }
+ function showConfirm(message, continueCallback) {
+    confirmMessage.textContent = message;
+    confirmModal.style.display = 'block';
+    continueButton.onclick = () => {
+        continueCallback();
+    };
+    cancelButton.onclick = closeModal;
+}
+
+function closeModal() {
+    confirmModal.style.display = 'none';
+}
 
     // Participant Functions
     addParticipantButton.addEventListener('click', function () {
