@@ -18,10 +18,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const customAlertModal = document.getElementById('custom-alert');
     const alertMessage = document.getElementById('alert-message');
     const closeButton = document.querySelector('.close-button');
+    const confirmModal = document.getElementById('confirm-modal');
+    const confirmMessage = document.getElementById('confirm-message');
+    const cancelButton = document.getElementById('cancel-button');
+    const continueButton = document.getElementById('continue-button');
 
     let participants = JSON.parse(localStorage.getItem('participants')) || [];
     let activities = JSON.parse(localStorage.getItem('activities')) || [];
     let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    let participantToRemove = null;
 
     // Initialize
     function initialize() {
@@ -47,11 +52,20 @@ document.addEventListener('DOMContentLoaded', function () {
         if (event.target == customAlertModal) {
             customAlertModal.style.display = 'none';
         }
+        if (event.target == confirmModal) {
+            confirmModal.style.display = 'none';
+        }
     };
 
     function showAlert(message) {
         alertMessage.textContent = message;
         customAlertModal.style.display = 'block';
+    }
+
+    function showConfirm(message, continueCallback) {
+        confirmMessage.textContent = message;
+        confirmModal.style.display = 'block';
+        continueButton.onclick = continueCallback;
     }
 
     // Participant Functions
@@ -74,12 +88,33 @@ document.addEventListener('DOMContentLoaded', function () {
         removeButton.textContent = 'Remove';
         removeButton.style.marginLeft = '10px';
         removeButton.addEventListener('click', function () {
-            participantsList.removeChild(li);
-            participants = participants.filter(participant => participant !== name);
-            localStorage.setItem('participants', JSON.stringify(participants));
-            removeParticipantExpenses(name);
-            updateCostSplitting();
-            updatePayerDropdown();
+            participantToRemove = name;
+            const userExpenses = expenses.filter(expense => expense.payer === name);
+            const amountOwed = calculateAmountOwed(name);
+
+            if (userExpenses.length > 0) {
+                showConfirm(
+                    `Are you sure? Removing ${name} will also remove all expense loggings related to ${name}.`,
+                    function () {
+                        confirmModal.style.display = 'none';
+                        showConfirm(
+                            `Are you sure you want to remove ${name}? ${name} ${amountOwed > 0 ? 'is owed' : 'owes'} ₦${Math.abs(amountOwed).toFixed(2)}`,
+                            function () {
+                                confirmModal.style.display = 'none';
+                                removeParticipant(name);
+                            }
+                        );
+                    }
+                );
+            } else {
+                showConfirm(
+                    `Are you sure you want to remove ${name}? ${name} ${amountOwed > 0 ? 'is owed' : 'owes'} ₦${Math.abs(amountOwed).toFixed(2)}`,
+                    function () {
+                        confirmModal.style.display = 'none';
+                        removeParticipant(name);
+                    }
+                );
+            }
         });
 
         li.appendChild(removeButton);
@@ -96,10 +131,39 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function calculateAmountOwed(participantName) {
+        const totalCost = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+        const shares = {};
+        participants.forEach(participant => {
+            shares[participant] = 0;
+        });
+        expenses.forEach(expense => {
+            if (participants.includes(expense.payer)) {
+                shares[expense.payer] += expense.amount;
+            }
+        });
+        const perPersonShare = totalCost / participants.length;
+        return shares[participantName] - perPersonShare;
+    }
+
+    function removeParticipant(participantName) {
+        participants = participants.filter(participant => participant !== participantName);
+        localStorage.setItem('participants', JSON.stringify(participants));
+        removeParticipantExpenses(participantName);
+        updateCostSplitting();
+        updatePayerDropdown();
+        renderParticipants();
+    }
+
     function removeParticipantExpenses(participantName) {
         expenses = expenses.filter(expense => expense.payer !== participantName);
         localStorage.setItem('expenses', JSON.stringify(expenses));
         renderExpenses();
+    }
+
+    function renderParticipants() {
+        participantsList.innerHTML = '';
+        participants.forEach(addParticipantToDOM);
     }
 
     function renderExpenses() {
