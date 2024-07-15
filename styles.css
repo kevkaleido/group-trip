@@ -25,10 +25,10 @@ nav ul {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #f84e4e;
     text-decoration: none;
     font-weight: bold;
-    text-shadow: 2px 2px #000; /* Shadowed text */
+
     transform: skewX(-10deg); /* Skewed links */
     transition: color 0.3s, transform 0.3s; /* Smooth transition */
 }

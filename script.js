@@ -1,7 +1,7 @@
 // script.js
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Trip Planning Section
+    // Elements
     const tripForm = document.getElementById('new-trip-form');
     const participantsList = document.getElementById('participants-list');
     const addParticipantButton = document.getElementById('add-participant');
@@ -9,124 +9,162 @@ document.addEventListener('DOMContentLoaded', function () {
     const activitiesList = document.getElementById('activities-list');
     const addActivityButton = document.getElementById('add-activity');
     const activityNameInput = document.getElementById('activity-name');
+    const expenseForm = document.getElementById('new-expense-form');
+    const expensesList = document.getElementById('expenses');
+    const tripCostElement = document.getElementById('trip-cost');
+    const sharesList = document.getElementById('shares-list');
+    const generateSummaryButton = document.getElementById('generate-summary');
+    const summaryContent = document.getElementById('summary-content');
+    const exportDataButton = document.getElementById('export-data');
 
-    const participants = [];
-    const activities = [];
+    let participants = JSON.parse(localStorage.getItem('participants')) || [];
+    let activities = JSON.parse(localStorage.getItem('activities')) || [];
+    let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
-    // tripForm.addEventListener('submit', function (e) {
-    //     e.preventDefault();
-    //     const destination = document.getElementById('trip-destination').value;
-    //     const startDate = document.getElementById('trip-start-date').value;
-    //     const endDate = document.getElementById('trip-end-date').value;
+    // Initialize
+    function initialize() {
+        participants.forEach(addParticipantToDOM);
+        activities.forEach(addActivityToDOM);
+        expenses.forEach(addExpenseToDOM);
+        updateCostSplitting();
+    }
 
-    //     alert(`Trip to ${destination} from ${startDate} to ${endDate} created!`);
-    //     tripForm.reset();
-    // });
+    // Helper function to format date to dd-mm-yyyy
+    function formatDate(dateString) {
+        const [year, month, day] = dateString.split('-');
+        return `${day}-${month}-${year}`;
+    }
 
+    // Participant Functions
     addParticipantButton.addEventListener('click', function () {
         const name = participantNameInput.value;
         if (name && !participants.includes(name)) {
             participants.push(name);
-            const li = document.createElement('li');
-            li.textContent = name;
-
-            // Add remove button
-            const removeButton = document.createElement('button');
-            removeButton.textContent = 'Remove';
-            removeButton.style.marginLeft = '10px';
-            removeButton.addEventListener('click', function () {
-                participantsList.removeChild(li);
-                participants.splice(participants.indexOf(name), 1);
-                updateCostSplitting();
-            });
-
-            li.appendChild(removeButton);
-            participantsList.appendChild(li);
+            localStorage.setItem('participants', JSON.stringify(participants));
+            addParticipantToDOM(name);
             participantNameInput.value = '';
         }
     });
 
+    function addParticipantToDOM(name) {
+        const li = document.createElement('li');
+        li.textContent = name;
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.style.marginLeft = '10px';
+        removeButton.addEventListener('click', function () {
+            participantsList.removeChild(li);
+            participants = participants.filter(participant => participant !== name);
+            localStorage.setItem('participants', JSON.stringify(participants));
+            updateCostSplitting();
+        });
+
+        li.appendChild(removeButton);
+        participantsList.appendChild(li);
+    }
+
+    // Activity Functions
     addActivityButton.addEventListener('click', function () {
         const activity = activityNameInput.value;
         if (activity) {
             activities.push(activity);
-            const li = document.createElement('li');
-            li.textContent = activity;
-
-            // Add remove button
-            const removeButton = document.createElement('button');
-            removeButton.textContent = 'Remove';
-            removeButton.style.marginLeft = '10px';
-            removeButton.addEventListener('click', function () {
-                activitiesList.removeChild(li);
-                activities.splice(activities.indexOf(activity), 1);
-            });
-
-            li.appendChild(removeButton);
-            activitiesList.appendChild(li);
+            localStorage.setItem('activities', JSON.stringify(activities));
+            addActivityToDOM(activity);
             activityNameInput.value = '';
         }
     });
 
-    // Expense Logging Section
-    const expenseForm = document.getElementById('new-expense-form');
-    const expensesList = document.getElementById('expenses');
+    function addActivityToDOM(activity) {
+        const li = document.createElement('li');
+        li.textContent = activity;
 
-    const expenses = [];
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.style.marginLeft = '10px';
+        removeButton.addEventListener('click', function () {
+            activitiesList.removeChild(li);
+            activities = activities.filter(act => act !== activity);
+            localStorage.setItem('activities', JSON.stringify(activities));
+        });
 
+        li.appendChild(removeButton);
+        activitiesList.appendChild(li);
+    }
+
+    // Expense Functions
     expenseForm.addEventListener('submit', function (e) {
         e.preventDefault();
         const amount = parseFloat(document.getElementById('expense-amount').value);
         const category = document.getElementById('expense-category').value;
         const payer = document.getElementById('expense-payer').value;
-        const date = document.getElementById('expense-date').value;
+        const date = formatDate(document.getElementById('expense-date').value);
 
         const expense = { amount, category, payer, date };
         expenses.push(expense);
+        localStorage.setItem('expenses', JSON.stringify(expenses));
 
-        const li = document.createElement('li');
-        li.textContent = `${category}: $${amount} paid by ${payer} on ${date}`;
-        expensesList.appendChild(li);
-
+        addExpenseToDOM(expense);
         expenseForm.reset();
         updateCostSplitting();
     });
 
-    // Cost Splitting Section
-    const tripCostElement = document.getElementById('trip-cost');
-    const sharesList = document.getElementById('shares-list');
+    function addExpenseToDOM(expense) {
+        const li = document.createElement('li');
+        li.textContent = `${expense.category}: $${expense.amount} paid by ${expense.payer} on ${expense.date}`;
 
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.style.marginLeft = '10px';
+        removeButton.addEventListener('click', function () {
+            expensesList.removeChild(li);
+            expenses = expenses.filter(exp => exp !== expense);
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+            updateCostSplitting();
+        });
+
+        li.appendChild(removeButton);
+        expensesList.appendChild(li);
+    }
+
+    // Cost Splitting Functions
     function updateCostSplitting() {
         const totalCost = expenses.reduce((acc, expense) => acc + expense.amount, 0);
         tripCostElement.textContent = `$${totalCost.toFixed(2)}`;
 
         const shares = {};
 
-        expenses.forEach(expense => {
-            if (!shares[expense.payer]) {
-                shares[expense.payer] = 0;
-            }
-            shares[expense.payer] += expense.amount;
+        participants.forEach(participant => {
+            shares[participant] = 0;
         });
+
+        expenses.forEach(expense => {
+            if (participants.includes(expense.payer)) {
+                shares[expense.payer] += expense.amount;
+            }
+        });
+
+        const perPersonShare = totalCost / participants.length;
 
         sharesList.innerHTML = '';
 
         participants.forEach(participant => {
-            const share = shares[participant] || 0;
+            const share = shares[participant] - perPersonShare;
             const li = document.createElement('li');
-            li.textContent = `${participant} owes $${share.toFixed(2)}`;
+            if (share > 0) {
+                li.textContent = `${participant} owns $${share.toFixed(2)}`;
+            } else {
+                li.textContent = `${participant} owes $${Math.abs(share).toFixed(2)}`;
+            }
             sharesList.appendChild(li);
         });
     }
 
-    // Reports Section
-    const generateSummaryButton = document.getElementById('generate-summary');
-    const summaryContent = document.getElementById('summary-content');
-    const exportDataButton = document.getElementById('export-data');
-
+    // Reports Functions
     generateSummaryButton.addEventListener('click', function () {
         let summary = 'Trip Summary:\n\n';
-        summary += `Total Cost: ${tripCostElement.textContent}\n\n`;
+        const totalCost = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+        summary += `Total Cost: $${totalCost.toFixed(2)}\n\n`;
         summary += 'Expenses:\n';
 
         expenses.forEach(expense => {
@@ -135,14 +173,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
         summary += '\nParticipant Shares:\n';
 
+        const shares = {};
+
         participants.forEach(participant => {
-            const share = expenses
-                .filter(expense => expense.payer === participant)
-                .reduce((acc, expense) => acc + expense.amount, 0);
-            summary += `${participant} owes $${share.toFixed(2)}\n`;
+            shares[participant] = 0;
         });
 
-        summaryContent.textContent = summary;
+        expenses.forEach(expense => {
+            if (participants.includes(expense.payer)) {
+                shares[expense.payer] += expense.amount;
+            }
+        });
+
+        const perPersonShare = totalCost / participants.length;
+
+        participants.forEach(participant => {
+            const share = shares[participant] - perPersonShare;
+            if (share > 0) {
+                summary += `${participant} owns $${share.toFixed(2)}\n`;
+            } else {
+                summary += `${participant} owes $${Math.abs(share).toFixed(2)}\n`;
+            }
+        });
+
+        summaryContent.textContent = summary.replace(/\n/g, '\n\n');
     });
 
     exportDataButton.addEventListener('click', function () {
@@ -153,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function () {
         doc.save('trip-summary.pdf');
     });
 
-    // Initial setup
+    // Navigation
     const sections = document.querySelectorAll('section');
     sections.forEach(section => section.style.display = 'none');
     document.querySelector('#trip-planning').style.display = 'block';
@@ -167,4 +221,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById(targetId).style.display = 'block';
         });
     });
+
+    // Initialize the app
+    initialize();
 });
