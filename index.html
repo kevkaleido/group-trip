@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Planner SPA</title>
+    <title>Group Expense Planner</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,13 +25,17 @@
                 <h2>Participants</h2>
                 <input type="text" id="participant-name" placeholder="Add Someone">
                 <button id="add-participant">Add</button>
-                <ul id="participants-list"></ul>
+                <div class="scroll-container">
+                    <ul id="participants-list"></ul>
+                </div>
             </div>
             <div id="trip-activities">
                 <h2>Activities</h2>
                 <input type="text" id="activity-name" placeholder="Add Activity">
                 <button id="add-activity">Add</button>
-                <ul id="activities-list"></ul>
+                <div class="scroll-container">
+                    <ul id="activities-list"></ul>
+                </div>
             </div>
         </section>
         <!-- Expense Logging Section -->
@@ -51,19 +55,23 @@
             </form>
             <div id="expenses-list">
                 <h2>All Expenses</h2>
-                <ul id="expenses"></ul>
+                <div class="scroll-container">
+                    <ul id="expenses"></ul>
+                </div>
             </div>
         </section>
         <!-- Cost Splitting Section -->
         <section id="cost-splitting">
             <h1>Cost Splitting</h1>
             <div id="total-cost">
-                <h2>Total Trip Cost</h2>
+                <h2>Total Cost</h2>
                 <p id="trip-cost">0</p>
             </div>
             <div id="participant-shares">
                 <h2>Participant Shares</h2>
-                <ul id="shares-list"></ul>
+                <div class="scroll-container">
+                    <ul id="shares-list"></ul>
+                </div>
             </div>
         </section>
         <!-- Reports Section -->

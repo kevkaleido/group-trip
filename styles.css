@@ -164,7 +164,8 @@ li:hover {
     margin: 5% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    border-radius: 6px;
+    width: 50%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
@@ -180,4 +181,9 @@ li:hover {
     color: black;
     text-decoration: none;
     cursor: pointer;
+}
+
+.continue-button{
+    
+    width: 10%;
 }

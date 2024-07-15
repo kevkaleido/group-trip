@@ -62,18 +62,18 @@ document.addEventListener('DOMContentLoaded', function () {
         customAlertModal.style.display = 'block';
     }
 
- function showConfirm(message, continueCallback) {
-    confirmMessage.textContent = message;
-    confirmModal.style.display = 'block';
-    continueButton.onclick = () => {
-        continueCallback();
-    };
-    cancelButton.onclick = closeModal;
-}
+    function showConfirm(message, continueCallback) {
+        confirmMessage.textContent = message;
+        confirmModal.style.display = 'block';
+        continueButton.onclick = () => {
+            continueCallback();
+        };
+        cancelButton.onclick = closeModal;
+    }
 
-function closeModal() {
-    confirmModal.style.display = 'none';
-}
+    function closeModal() {
+        confirmModal.style.display = 'none';
+    }
 
     // Participant Functions
     addParticipantButton.addEventListener('click', function () {
@@ -101,7 +101,7 @@ function closeModal() {
 
             if (userExpenses.length > 0) {
                 showConfirm(
-                    `Are you sure? Removing ${name} will also remove all expense loggings related to ${name}.`,
+                    `Are you sure? Removing ${name} will also remove all expense loggings related to them.`,
                     function () {
                         confirmModal.style.display = 'none';
                         showConfirm(
@@ -126,6 +126,8 @@ function closeModal() {
 
         li.appendChild(removeButton);
         participantsList.appendChild(li);
+
+        checkScroll(participantsList);
     }
 
     function updatePayerDropdown() {
@@ -204,6 +206,8 @@ function closeModal() {
 
         li.appendChild(removeButton);
         activitiesList.appendChild(li);
+
+        checkScroll(activitiesList);
     }
 
     // Expense Functions
@@ -244,6 +248,8 @@ function closeModal() {
 
         li.appendChild(removeButton);
         expensesList.appendChild(li);
+
+        checkScroll(expensesList);
     }
 
     // Cost Splitting Functions
@@ -277,6 +283,8 @@ function closeModal() {
             }
             sharesList.appendChild(li);
         });
+
+        checkScroll(sharesList);
     }
 
     // Reports Functions
@@ -343,4 +351,16 @@ function closeModal() {
 
     // Initialize the app
     initialize();
+
+    // Check if list needs scroll
+    function checkScroll(element) {
+        const maxItems = 4;
+        if (element.children.length > maxItems) {
+            element.style.overflowY = 'auto';
+            element.style.maxHeight = '200px';
+        } else {
+            element.style.overflowY = 'unset';
+            element.style.maxHeight = 'unset';
+        }
+    }
 });
