@@ -100,6 +100,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const payer = document.getElementById('expense-payer').value;
         const date = formatDate(document.getElementById('expense-date').value);
 
+        if (!participants.includes(payer)) {
+            alert('The payer must be a participant.');
+            return;
+        }
+
         const expense = { amount, category, payer, date };
         expenses.push(expense);
         localStorage.setItem('expenses', JSON.stringify(expenses));
@@ -111,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function addExpenseToDOM(expense) {
         const li = document.createElement('li');
-        li.textContent = `${expense.category}: $${expense.amount} paid by ${expense.payer} on ${expense.date}`;
+        li.textContent = `${expense.category}: ₦${expense.amount.toFixed(2)} paid by ${expense.payer} on ${expense.date}`;
 
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
@@ -130,7 +135,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Cost Splitting Functions
     function updateCostSplitting() {
         const totalCost = expenses.reduce((acc, expense) => acc + expense.amount, 0);
-        tripCostElement.textContent = `$${totalCost.toFixed(2)}`;
+        tripCostElement.textContent = `₦${totalCost.toFixed(2)}`;
 
         const shares = {};
 
@@ -152,9 +157,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const share = shares[participant] - perPersonShare;
             const li = document.createElement('li');
             if (share > 0) {
-                li.textContent = `${participant} owns $${share.toFixed(2)}`;
+                li.textContent = `${participant} owns ₦${share.toFixed(2)}`;
             } else {
-                li.textContent = `${participant} owes $${Math.abs(share).toFixed(2)}`;
+                li.textContent = `${participant} owes ₦${Math.abs(share).toFixed(2)}`;
             }
             sharesList.appendChild(li);
         });
@@ -164,11 +169,11 @@ document.addEventListener('DOMContentLoaded', function () {
     generateSummaryButton.addEventListener('click', function () {
         let summary = 'Trip Summary:\n\n';
         const totalCost = expenses.reduce((acc, expense) => acc + expense.amount, 0);
-        summary += `Total Cost: $${totalCost.toFixed(2)}\n\n`;
+        summary += `Total Cost: ₦${totalCost.toFixed(2)}\n\n`;
         summary += 'Expenses:\n';
 
         expenses.forEach(expense => {
-            summary += `${expense.category}: $${expense.amount} paid by ${expense.payer} on ${expense.date}\n`;
+            summary += `${expense.category}: ₦${expense.amount.toFixed(2)} paid by ${expense.payer} on ${expense.date}\n`;
         });
 
         summary += '\nParticipant Shares:\n';
@@ -190,9 +195,9 @@ document.addEventListener('DOMContentLoaded', function () {
         participants.forEach(participant => {
             const share = shares[participant] - perPersonShare;
             if (share > 0) {
-                summary += `${participant} owns $${share.toFixed(2)}\n`;
+                summary += `${participant} owns ₦${share.toFixed(2)}\n`;
             } else {
-                summary += `${participant} owes $${Math.abs(share).toFixed(2)}\n`;
+                summary += `${participant} owes ₦${Math.abs(share).toFixed(2)}\n`;
             }
         });
 
