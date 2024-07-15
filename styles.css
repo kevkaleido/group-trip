@@ -41,6 +41,7 @@ nav ul li a:hover {
 main {
     padding: 3em;
     transform: rotate(-2deg); /* Slightly rotated */
+    
 }
 
 section {

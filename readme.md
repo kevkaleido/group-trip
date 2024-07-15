@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Travel Planner SPA is a single-page application designed to help users plan trips, log expenses, split costs, and generate reports. The application is built with HTML, CSS, and JavaScript to provide a user-friendly and responsive interface.
+The Trip Planner is a single-page application designed to help users plan trips, log expenses, split costs, and generate reports. The application is built with HTML, CSS, and JavaScript to provide a user-friendly and responsive interface.
 
 ## Features
 
