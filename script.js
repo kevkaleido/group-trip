@@ -1,5 +1,3 @@
-// script.js
-
 document.addEventListener('DOMContentLoaded', function () {
     // Elements
     const tripForm = document.getElementById('new-trip-form');
@@ -16,6 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const generateSummaryButton = document.getElementById('generate-summary');
     const summaryContent = document.getElementById('summary-content');
     const exportDataButton = document.getElementById('export-data');
+    const payerSelect = document.getElementById('expense-payer');
+    const customAlertModal = document.getElementById('custom-alert');
+    const alertMessage = document.getElementById('alert-message');
+    const closeButton = document.querySelector('.close-button');
 
     let participants = JSON.parse(localStorage.getItem('participants')) || [];
     let activities = JSON.parse(localStorage.getItem('activities')) || [];
@@ -27,12 +29,29 @@ document.addEventListener('DOMContentLoaded', function () {
         activities.forEach(addActivityToDOM);
         expenses.forEach(addExpenseToDOM);
         updateCostSplitting();
+        updatePayerDropdown();
     }
 
     // Helper function to format date to dd-mm-yyyy
     function formatDate(dateString) {
         const [year, month, day] = dateString.split('-');
         return `${day}-${month}-${year}`;
+    }
+
+    // Custom alert functions
+    closeButton.addEventListener('click', function () {
+        customAlertModal.style.display = 'none';
+    });
+
+    window.onclick = function (event) {
+        if (event.target == customAlertModal) {
+            customAlertModal.style.display = 'none';
+        }
+    };
+
+    function showAlert(message) {
+        alertMessage.textContent = message;
+        customAlertModal.style.display = 'block';
     }
 
     // Participant Functions
@@ -43,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
             localStorage.setItem('participants', JSON.stringify(participants));
             addParticipantToDOM(name);
             participantNameInput.value = '';
+            updatePayerDropdown();
         }
     });
 
@@ -58,10 +78,21 @@ document.addEventListener('DOMContentLoaded', function () {
             participants = participants.filter(participant => participant !== name);
             localStorage.setItem('participants', JSON.stringify(participants));
             updateCostSplitting();
+            updatePayerDropdown();
         });
 
         li.appendChild(removeButton);
         participantsList.appendChild(li);
+    }
+
+    function updatePayerDropdown() {
+        payerSelect.innerHTML = ''; // Clear current options
+        participants.forEach(participant => {
+            const option = document.createElement('option');
+            option.value = participant;
+            option.textContent = participant;
+            payerSelect.appendChild(option);
+        });
     }
 
     // Activity Functions
@@ -97,11 +128,11 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         const amount = parseFloat(document.getElementById('expense-amount').value);
         const category = document.getElementById('expense-category').value;
-        const payer = document.getElementById('expense-payer').value;
+        const payer = payerSelect.value;
         const date = formatDate(document.getElementById('expense-date').value);
 
         if (!participants.includes(payer)) {
-            alert('The payer must be a participant.');
+            showAlert('The payer must be a participant.');
             return;
         }
 

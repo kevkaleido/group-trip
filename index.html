@@ -21,16 +21,6 @@
         <!-- Trip Planning Section -->
         <section id="trip-planning">
             <h1>Trip Planning</h1>
-            <!-- <form id="new-trip-form">
-                <h2>Create a New Trip</h2>
-                <label for="trip-destination">Destination:</label>
-                <input type="text" id="trip-destination" required>
-                <label for="trip-start-date">Start Date:</label>
-                <input type="date" id="trip-start-date" required>
-                <label for="trip-end-date">End Date:</label>
-                <input type="date" id="trip-end-date" required>
-                <button type="submit">Create Trip</button>
-            </form> -->
             <div id="trip-participants">
                 <h2>Participants</h2>
                 <input type="text" id="participant-name" placeholder="Add Someone">
@@ -54,7 +44,7 @@
                 <label for="expense-category">Category:</label>
                 <input type="text" id="expense-category" required>
                 <label for="expense-payer">Payer:</label>
-                <input type="text" id="expense-payer" required>
+                <select id="expense-payer" required></select>
                 <label for="expense-date">Date:</label>
                 <input type="date" id="expense-date" required>
                 <button type="submit">Add Expense</button>
@@ -87,6 +77,13 @@
             <button id="export-data">Export Data</button>
         </section>
     </main>
+    <!-- Custom Alert Modal -->
+    <div id="custom-alert" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p id="alert-message"></p>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
