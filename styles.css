@@ -1,174 +1,121 @@
-/* styles.css */
-
 body {
-    font-family: 'Arial', sans-serif; /* Readable font */
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    color: #fff;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    background: linear-gradient(135deg, #f0f8ff, #ff69b4); /* Gradient background */
-    color: #333;
-    animation: bg-animation 10s infinite alternate; /* Animated background */
 }
 
 header {
-    background-color: #ff4500; /* Bright orange */
-    padding: 2em 0; /* Larger padding */
-    border-bottom: 5px dotted #000; /* Dotted border */
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1em;
 }
 
 nav ul {
     list-style: none;
     padding: 0;
+    margin: 0;
     display: flex;
-    justify-content: space-around; /* Evenly spaced items */
-    font-size: 1.2em; /* Larger font size */
+    justify-content: space-around;
 }
 
 nav ul li a {
-    color: #f84e4e;
+    color: #fff;
     text-decoration: none;
-    font-weight: bold;
-    transform: skewX(-10deg); /* Skewed links */
-    transition: color 0.3s, transform 0.3s; /* Smooth transition */
+    font-size: 1.2em;
+    transition: color 0.3s;
 }
 
 nav ul li a:hover {
-    color: #00ff00; /* Change color on hover */
-    transform: skewX(0); /* Reset skew on hover */
+    color: #ffeb3b;
 }
 
 main {
-    padding: 3em;
-}
-
-section {
-    margin-bottom: 3em;
     padding: 2em;
-    background: rgba(255, 255, 255, 0.8); /* Semi-transparent */
-    border-radius: 16px;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3); /* Larger shadow */
-    border: 2px dashed #000; /* Dashed border */
 }
 
-h1 {
-    color: #ff4500; /* Match header */
-    text-align: center; /* Centered text */
-    text-transform: uppercase; /* Uppercase text */
-    letter-spacing: 2px; /* Spaced out letters */
+h1, h2 {
+    font-family: 'Oswald', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-h2 {
-    color: #ff69b4; /* Bright pink */
-    font-style: italic; /* Italic text */
-    border-bottom: 2px solid #000; /* Underline */
-    padding-bottom: 0.5em;
+input, select, button {
+    border: none;
+    padding: 0.5em;
+    margin: 0.5em 0;
+    border-radius: 5px;
+    font-size: 1em;
 }
 
-form, div {
-    margin-bottom: 2em;
-}
-
-label {
-    display: block;
-    margin-top: 1em;
-    font-weight: bold;
-}
-
-input, button {
-    display: block;
-    margin-top: 1em;
-    padding: 1em;
-    width: 100%;
-    border-radius: 8px; /* Rounded corners */
-    font-family: 'Verdana', sans-serif; /* Readable font */
+input[type="text"], input[type="number"], input[type="date"], select {
+    width: calc(100% - 1em);
 }
 
 button {
-    background-color: #ff4500;
-    color: white;
-    border: none;
+    background: #ff5722;
+    color: #fff;
     cursor: pointer;
-    margin-top: 1em;
-    transform: scale(1.1); /* Slightly enlarged */
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background 0.3s;
 }
 
 button:hover {
-    background-color: #ff6347; /* Light coral */
-    transform: scale(1.2); /* Larger on hover */
+    background: #e64a19;
+}
+
+.scroll-container {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 2px solid #fff;
+    padding: 1em;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-top: 1em;
+    transition: max-height 0.5s, border 0.5s;
 }
 
 ul {
     list-style: none;
     padding: 0;
-    border: 2px solid #ff69b4; /* Border around the list */
-    border-radius: 8px;
 }
 
 li {
-    margin: 1em 0;
-    padding: 1em;
-    background: rgba(240, 248, 255, 0.9); /* Semi-transparent */
-    border: 2px solid #ff4500; /* Orange border */
-    border-radius: 8px;
-    transform: rotate(1deg); /* Slightly rotated */
-    transition: transform 0.3s, background 0.3s;
+    margin: 0.5em 0;
+    padding: 0.5em;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.3s;
 }
 
 li:hover {
-    transform: rotate(0); /* Reset rotation on hover */
-    background: rgba(255, 69, 0, 0.9); /* Bright orange */
-    color: white;
+    background: rgba(255, 255, 255, 0.4);
 }
 
-@media (min-width: 768px) {
-    main {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3em; /* Larger gap */
-        transform: rotate(0); /* Reset rotation on larger screens */
-    }
-    
-    section {
-        margin-bottom: 0;
-    }
-}
-
-@keyframes bg-animation {
-    from {
-        background: linear-gradient(135deg, #f0f8ff, #ff69b4);
-    }
-    to {
-        background: linear-gradient(135deg, #ff69b4, #f0f8ff);
-    }
-}
-
-/* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    display: none;
+    position: fixed;
+    z-index: 1;
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.8);
     padding-top: 60px;
 }
 
-/* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
-    margin: 5% auto; /* 15% from the top and centered */
+    background: #fff;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
-    border-radius: 6px;
-    width: 50%; /* Could be more or less, depending on screen size */
+    width: 80%;
+    border-radius: 10px;
+    color: #000;
 }
 
-/* The Close Button */
 .close-button {
     color: #aaa;
     float: right;
@@ -176,14 +123,13 @@ li:hover {
     font-weight: bold;
 }
 
-.close-button:hover,
-.close-button:focus {
-    color: black;
+.close-button:hover, .close-button:focus {
+    color: #000;
     text-decoration: none;
     cursor: pointer;
 }
 
-.continue-button{
-    
-    width: 10%;
+#summary-content {
+    white-space: pre-wrap;
 }
+
