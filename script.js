@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Elements
+    const btnLogout = document.getElementById('btnLogout');
     const tripForm = document.getElementById('new-trip-form');
     const participantsList = document.getElementById('participants-list');
     const addParticipantButton = document.getElementById('add-participant');
@@ -27,6 +28,43 @@ document.addEventListener('DOMContentLoaded', function () {
     let activities = JSON.parse(localStorage.getItem('activities')) || [];
     let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
     let participantToRemove = null;
+
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: process.env.FIREBASE_API_KEY,
+        authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+        projectId: process.env.FIREBASE_PROJECT_ID,
+        storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+        appId: process.env.FIREBASE_APP_ID,
+        measurementId: process.env.FIREBASE_MEASUREMENT_ID
+    };
+
+    firebase.initializeApp(firebaseConfig);
+
+    // Add logout event
+    btnLogout.addEventListener('click', e => {
+        firebase.auth().signOut()
+            .then(() => {
+                console.log('User signed out');
+                window.location.href = 'login.html';
+            })
+            .catch(error => {
+                console.error('Logout error:', error);
+            });
+    });
+
+    // Add a realtime listener
+    firebase.auth().onAuthStateChanged(firebaseUser => {
+        if (firebaseUser) {
+            console.log('User is logged in:', firebaseUser);
+            btnLogout.classList.remove('hide');
+        } else {
+            console.log('User is not logged in');
+            btnLogout.classList.add('hide');
+        }
+    });
+
 
     // Initialize
     function initialize() {
@@ -364,3 +402,5 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+
+
