@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Roboto:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #8BC6EC, #9599E2);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    background-attachment: fixed;
+    transition: background 2s ease-in-out;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 1em;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Courgette', cursive;
+    color: #FFEB3B;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    animation: glow 1.5s infinite alternate;
+    margin-bottom: 2em;
+}
+
+input[type="email"], input[type="password"] {
+    border: none;
+    padding: 1em;
+    margin: 0.5em 0;
+    border-radius: 15px;
+    font-size: 1em;
+    background: #FFEB3B;
+    color: #3E2723;
+    border: 2px solid #FFC107;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 0 10px #FFC107;
+    transition: background 0.3s, border 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+input[type="email"]:hover, input[type="password"]:hover {
+    border-color: #8BC34A;
+    box-shadow: 0 0 20px #8BC34A;
+}
+
+input[type="email"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-color: #FFC107;
+    box-shadow: 0 0 20px #FFC107;
+    background: #FFF59D;
+}
+
+button {
+    border: none;
+    padding: 1em 2em;
+    margin: 0.5em 0;
+    border-radius: 20px;
+    font-size: 1.2em;
+    background: #FFC107;
+    color: #3E2723;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 10px #FFC107;
+    width: 100%;
+    max-width: 300px;
+}
+
+button:hover {
+    background: #FF5722;
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #FF5722;
+}
+
+button:focus {
+    outline: none;
+    background: #8BC34A;
+    box-shadow: 0 0 20px #8BC34A;
+}
+
+button:active {
+    background: #FFEB3B;
+    box-shadow: 0 0 20px #FFEB3B;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background: rgba(15, 15, 15, 0.8);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background: #1a1a1a;
+    margin: 5% auto;
+    padding: 20px;
+    border: 2px solid #8BC34A;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 15px;
+    color: #8BC34A;
+    box-shadow: 0 0 20px #8BC34A;
+}
+
+.close-button {
+    color: #8BC34A;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover, .close-button:focus {
+    color: #FFC107;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@keyframes glow {
+    0% { text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); }
+    100% { text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7); }
+}
+
+@media (max-width: 600px) {
+    input, button {
+        font-size: 0.9em;
+        padding: 0.75em;
+    }
+
+    .modal-content {
+        width: 70%;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+}

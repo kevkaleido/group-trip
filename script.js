@@ -1,3 +1,5 @@
+import './auth.js';
+
 document.addEventListener('DOMContentLoaded', function () {
     // Elements
     const btnLogout = document.getElementById('btnLogout');
@@ -38,21 +40,30 @@ document.addEventListener('DOMContentLoaded', function () {
         messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
         appId: process.env.FIREBASE_APP_ID,
         measurementId: process.env.FIREBASE_MEASUREMENT_ID
-    };
+      };
 
     firebase.initializeApp(firebaseConfig);
 
     // Add logout event
     btnLogout.addEventListener('click', e => {
-        firebase.auth().signOut()
-            .then(() => {
-                console.log('User signed out');
-                window.location.href = 'login.html';
-            })
-            .catch(error => {
-                console.error('Logout error:', error);
-            });
+        showConfirm(
+            "Are you sure you want to log out?",
+            function () {
+                confirmModal.style.display = 'none';
+                firebase.auth().signOut()
+                    .then(() => {
+                        console.log('User signed out');
+                        window.location.href = 'login.html';
+                    })
+                    .catch(error => {
+                        console.error('Logout error:', error);
+                    });
+            }
+        );
     });
+    
+
+    
 
     // Add a realtime listener
     firebase.auth().onAuthStateChanged(firebaseUser => {
