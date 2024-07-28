@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Courgette&family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #8BC6EC, #9599E2);
-    color: #fff;
+    background: linear-gradient(to right, #4b0082, #0f0f6d);
+    color: #00ffcc;
     margin: 0;
     padding: 0;
     background-attachment: fixed;
@@ -11,7 +11,7 @@ body {
 }
 
 header {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.8);
     padding: 1em;
     display: flex;
     justify-content: center;
@@ -33,23 +33,23 @@ nav ul {
 }
 
 nav ul li a {
-    background: #FFC107;
-    color: #3E2723;
+    background: #00ffcc;
+    color: #001f3f;
     padding: 1em 2em;
     border-radius: 20px;
     text-decoration: none;
     font-size: 1.2em;
     transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
-    box-shadow: 0 0 10px #FFC107;
+    box-shadow: 0 0 10px #00ffcc;
     text-align: center;
     display: block;
-    font-family: 'Courgette', cursive;
+    font-family: 'Orbitron', sans-serif;
 }
 
 nav ul li a:hover {
-    background: #FF5722;
+    background: #ff00cc;
     transform: scale(1.1);
-    box-shadow: 0 0 20px #FF5722;
+    box-shadow: 0 0 20px #ff00cc;
 }
 
 main {
@@ -58,8 +58,8 @@ main {
 }
 
 h1, h2 {
-    font-family: 'Courgette', cursive;
-    color: #FFEB3B;
+    font-family: 'Orbitron', sans-serif;
+    color: #00ffcc;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     animation: glow 1.5s infinite alternate;
 }
@@ -75,46 +75,45 @@ input, select, button {
     margin: 0.5em 0;
     border-radius: 15px;
     font-size: 1em;
-    background: #FFC107;
-    color: #3E2723;
+    background: #00ffcc;
+    color: #001f3f;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-
 input[type="text"], input[type="number"], input[type="date"], select {
     width: calc(100% - 1em);
-    background: #FFEB3B;
-    color: #3E2723;
-    border: 2px solid #FFC107;
+    background: #00ffcc;
+    color: #001f3f;
+    border: 2px solid #00ffcc;
     padding: 1em;
-    box-shadow: 0 0 10px #FFC107;
+    box-shadow: 0 0 10px #00ffcc;
 }
 
 button {
-    background: #8BC34A;
-    color: #3E2723;
+    background: #ff00cc;
+    color: #001f3f;
     cursor: pointer;
     transition: background 0.3s, transform 0.3s;
-    border: 2px solid #FFC107;
-    box-shadow: 0 0 10px #8BC34A;
+    border: 2px solid #00ffcc;
+    box-shadow: 0 0 10px #ff00cc;
 }
 
 button:hover {
-    background: #FFEB3B;
+    background: #00ffcc;
     transform: scale(1.1);
-    box-shadow: 0 0 20px #FFEB3B;
+    box-shadow: 0 0 20px #00ffcc;
 }
 
 .scroll-container {
     max-height: 300px;
     overflow-y: auto;
-    border: 2px solid #8BC34A;
+    border: 2px solid #ff00cc;
     padding: 1em;
-    background: rgba(255, 235, 59, 0.2);
+    background: rgba(0, 255, 204, 0.2);
     border-radius: 15px;
     margin-top: 1em;
     transition: max-height 0.5s, border 0.5s;
-    box-shadow: 0 0 10px #8BC34A;
+    box-shadow: 0 0 10px #ff00cc;
 }
 
 ul {
@@ -125,20 +124,20 @@ ul {
 li {
     margin: 0.5em 0;
     padding: 0.5em;
-    background: rgba(255, 235, 59, 0.2);
-    border: 2px solid #FFEB3B;
+    background: rgba(0, 255, 204, 0.2);
+    border: 2px solid #00ffcc;
     border-radius: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-    box-shadow: 0 0 10px #FFEB3B;
+    box-shadow: 0 0 10px #00ffcc;
 }
 
 li:hover {
-    background: rgba(255, 235, 59, 0.4);
+    background: rgba(0, 255, 204, 0.4);
     transform: scale(1.05);
-    box-shadow: 0 0 20px #FFEB3B;
+    box-shadow: 0 0 20px #00ffcc;
 }
 
 .modal {
@@ -159,22 +158,22 @@ li:hover {
     background: #1a1a1a;
     margin: 5% auto;
     padding: 20px;
-    border: 2px solid #8BC34A;
+    border: 2px solid #ff00cc;
     width: 50%;
     border-radius: 15px;
-    color: #8BC34A;
-    box-shadow: 0 0 20px #8BC34A;
+    color: #00ffcc;
+    box-shadow: 0 0 20px #ff00cc;
 }
 
 .close-button {
-    color: #8BC34A;
+    color: #00ffcc;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
 
 .close-button:hover, .close-button:focus {
-    color: #FFC107;
+    color: #ff00cc;
     text-decoration: none;
     cursor: pointer;
 }
@@ -184,7 +183,7 @@ li:hover {
     background: rgba(15, 15, 15, 0.8);
     padding: 1em;
     border-radius: 15px;
-    box-shadow: 0 0 10px #8BC34A;
+    box-shadow: 0 0 10px #ff00cc;
 }
 
 .scroll-container::-webkit-scrollbar {
@@ -192,12 +191,12 @@ li:hover {
 }
 
 .scroll-container::-webkit-scrollbar-thumb {
-    background: #8BC34A;
+    background: #ff00cc;
     border-radius: 10px;
 }
 
 .scroll-container::-webkit-scrollbar-thumb:hover {
-    background: #FFEB3B;
+    background: #00ffcc;
 }
 
 form {
@@ -210,13 +209,13 @@ button, input[type="text"], input[type="number"], input[type="date"], select {
 }
 
 button:hover, input:hover, select:hover {
-    border-color: #8BC34A;
-    box-shadow: 0 0 20px #8BC34A;
+    border-color: #ff00cc;
+    box-shadow: 0 0 20px #ff00cc;
 }
 
 button:active, input:active, select:active {
-    border-color: #FFC107;
-    box-shadow: 0 0 20px #FFC107;
+    border-color: #00ffcc;
+    box-shadow: 0 0 20px #00ffcc;
 }
 
 section {
@@ -233,16 +232,16 @@ header, main {
 }
 
 #generate-summary, #export-data {
-    background: #FFEB3B;
-    border: 2px solid #8BC34A;
+    background: #00ffcc;
+    border: 2px solid #ff00cc;
     transition: background 0.3s, transform 0.3s;
-    box-shadow: 0 0 10px #FFEB3B;
+    box-shadow: 0 0 10px #00ffcc;
 }
 
 #generate-summary:hover, #export-data:hover {
-    background: #8BC34A;
+    background: #ff00cc;
     transform: scale(1.05);
-    box-shadow: 0 0 20px #8BC34A;
+    box-shadow: 0 0 20px #ff00cc;
 }
 
 @media (max-width: 600px) {
@@ -258,12 +257,9 @@ header, main {
         width: 90%;
     }
 
-
-
     nav ul li {
         margin-bottom: 0.5em;
     }
-
 
     main {
         padding: 7em 1em 2em;
@@ -275,10 +271,9 @@ header, main {
     }
 }
 
-
-.modal-content{
+.modal-content {
     text-align: center;
     max-width: 50%;
-   
-
+    margin-top: auto;
+    margin-bottom: auto;
 }
