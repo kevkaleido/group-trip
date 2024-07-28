@@ -22,7 +22,7 @@ Split is a single-page application designed to help users plan trips, log expens
 4. **Reports**
    - Generate a summary of all expenses for the trip.
    - Show a breakdown of expenses for each participant.
-   - Export data to a PDF file.
+ 
 
 ## Directory Structure
 
@@ -43,7 +43,6 @@ The CSS uses Flexbox for layout management, ensuring a responsive design that ad
 JavaScript Functionality
 The JavaScript file (script.js) handles the following:
 
-Form submissions for creating new trips and adding expenses.
 Adding and removing participants.
 Marking activities as done.
 Calculating and displaying cost splitting information.
@@ -51,8 +50,8 @@ Generating and exporting reports.
 Initial Setup
 Trip Planning
 
-Users can create a new trip by filling out the form with destination, start date, and end date.
-Participants can be added to the trip, and their names will be displayed in a list. Clicking on a participant's name will remove them from the list.
+
+Participants can be added to a trip, and their names will be displayed in a list. Clicking on a participant's name will remove them from the list.
 Activities can be added to the trip. Clicking on an activity will mark it as done.
 Expense Logging
 
