@@ -5,7 +5,7 @@ body {
     background: linear-gradient(to right, #4b0082, #0f0f6d);
     color: #00ffcc;
     margin: 0;
-    padding: 0;
+    padding: 20px;
     background-attachment: fixed;
     transition: background 2s ease-in-out;
 }
@@ -81,7 +81,7 @@ input, select, button {
 }
 
 input[type="text"], input[type="number"], input[type="date"], select {
-    width: calc(100% - 1em);
+    width: 50%;
     background: #00ffcc;
     color: #001f3f;
     border: 2px solid #00ffcc;
@@ -244,6 +244,11 @@ header, main {
     box-shadow: 0 0 20px #ff00cc;
 }
 
+#trip-planning button{ 
+    margin-left: 250px;
+       
+    }
+
 @media (max-width: 600px) {
     input, select, button {
         font-size: 0.9em;
@@ -271,6 +276,11 @@ header, main {
         padding: 0.5em 1em;
         font-size: 1em;
     }
+
+    #trip-planning button{ 
+        margin-left: 80px;
+           
+        }
 }
 
 .modal-content {
@@ -278,3 +288,11 @@ header, main {
     max-width: 50%;
     
 }
+
+
+#new-expense-form button{
+    
+   width: 40%;
+   margin-left: auto;
+}
+
