@@ -276,44 +276,9 @@ header, main {
 }
 
 
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0); /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-    display: flex; /* Flexbox layout */
-    align-items: center; /* Center vertically */
-    justify-content: center; /* Center horizontally */
-}
+.modal-content{
+    text-align: center;
+    max-width: 50%;
+   
 
-.modal-content {
-    linear-gradient(to right, #8BC6EC, #9599E2);
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%;
-    max-width: 500px; /* Max width for smaller screens */
-    text-align: center; /* Center text content */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add shadows */
-}
-
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close-button:hover,
-.close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
 }
