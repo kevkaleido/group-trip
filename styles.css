@@ -58,10 +58,14 @@ main {
 }
 
 h1, h2 {
-    font-family: 'Courgette', cursive;
+    font-family: 'Roboto', sans-serif;
     color: #FFEB3B;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     animation: glow 1.5s infinite alternate;
+}
+
+h2{
+    color: #FF5722;
 }
 
 @keyframes glow {
