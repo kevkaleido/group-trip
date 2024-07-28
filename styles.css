@@ -251,10 +251,12 @@ header, main {
 
     header{
         position: fixed;
+        font-size: 12px;
+        padding: 12px;
     }
 
     nav ul {
-        width: 60%;
+        width: 90%;
     }
 
     nav ul li {
