@@ -254,7 +254,7 @@ header, main {
     }
 
     nav ul {
-        width: 90%;
+        width: 60%;
     }
 
     nav ul li {
@@ -274,6 +274,5 @@ header, main {
 .modal-content {
     text-align: center;
     max-width: 50%;
-    margin-top: auto;
-    margin-bottom: auto;
+    
 }
