@@ -188,14 +188,26 @@ document.addEventListener('DOMContentLoaded', function () {
     function addActivityToDOM(activity) {
         const li = document.createElement('li');
         li.textContent = activity;
+        li.style.cursor = 'pointer';
+
+        li.addEventListener('click', function () {
+            if (li.style.textDecoration === 'line-through') {
+                li.style.textDecoration = 'none';
+            } else {
+                li.style.textDecoration = 'line-through';
+            }
+        });
 
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
         removeButton.style.marginLeft = '10px';
         removeButton.addEventListener('click', function () {
-            activitiesList.removeChild(li);
-            activities = activities.filter(act => act !== activity);
-            localStorage.setItem('activities', JSON.stringify(activities));
+            showConfirm('Are you sure you want to remove this activity?', function () {
+                activitiesList.removeChild(li);
+                activities = activities.filter(act => act !== activity);
+                localStorage.setItem('activities', JSON.stringify(activities));
+                closeModal();
+            });
         });
 
         li.appendChild(removeButton);
@@ -235,10 +247,13 @@ document.addEventListener('DOMContentLoaded', function () {
         removeButton.textContent = 'Remove';
         removeButton.style.marginLeft = '10px';
         removeButton.addEventListener('click', function () {
-            expensesList.removeChild(li);
-            expenses = expenses.filter(exp => exp !== expense);
-            localStorage.setItem('expenses', JSON.stringify(expenses));
-            updateCostSplitting();
+            showConfirm('Are you sure you want to remove this expense?', function () {
+                expensesList.removeChild(li);
+                expenses = expenses.filter(exp => exp !== expense);
+                localStorage.setItem('expenses', JSON.stringify(expenses));
+                updateCostSplitting();
+                closeModal();
+            });
         });
 
         li.appendChild(removeButton);
