@@ -362,15 +362,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize the app
     initialize();
 
-    // Check if list needs scroll
     function checkScroll(element) {
         const maxItems = 4;
         if (element.children.length > maxItems) {
-            element.style.overflowY = 'auto';
-            element.style.maxHeight = '200px';
+            element.classList.add('scrollable');
+            element.classList.remove('unscrollable');
         } else {
-            element.style.overflowY = 'unset';
-            element.style.maxHeight = 'unset';
+            element.classList.add('unscrollable');
+            element.classList.remove('scrollable');
         }
     }
+    
 });
